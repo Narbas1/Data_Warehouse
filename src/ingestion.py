@@ -3,15 +3,18 @@ import psycopg
 import os, json, hashlib
 from dotenv import load_dotenv
 
-load_dotenv()
+from pathlib import Path
+load_dotenv(Path(__file__).with_name("pipeline.env"))
 
 API_KEY = os.getenv("GECKO_API_KEY")
 
 endpoint = "https://api.coingecko.com/api/v3/simple/price"
 params = {"ids": "bitcoin,ethereum,solana", "vs_currencies": "eur", "include_last_updated_at": "true"}
-headers = {"x-cg-demo-api-key": API_KEY} if API_KEY else {}
 
-r = requests.get(endpoint, params=params, headers=headers, timeout=30)
+if API_KEY:
+	params["x_cg_demo_api_key"] = API_KEY
+
+r = requests.get(endpoint, params=params, timeout=30)
 r.raise_for_status()
 payload = r.json()
 
