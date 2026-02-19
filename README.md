@@ -1,4 +1,4 @@
-# Crypto Data Warehouse
+# Data Warehouse
 
 Simple data engineering project that collects cryptocurrency prices from the CoinGecko API and stores them in a layered data warehouse.
 
@@ -42,4 +42,5 @@ It uses PostgreSQL (OLTP) as the data warehouse.
 That is ok for small datasets, but it would not scale well for large analytical workloads.
 
 In real-world systems, OLAP database would be used instead.
+
 
